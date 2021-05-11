@@ -11,6 +11,7 @@ namespace HealthyMee.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Patient> PatientStore => DependencyService.Get<IDataStore<Patient>>();
 
         bool isBusy = false;
         public bool IsBusy

@@ -1,12 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HealthyMee.Views.PatientListPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="HealthyMee.Views.PatientListPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:HealthyMee.ViewModels"  
+             xmlns:model="clr-namespace:HealthyMee.Models" 
+             x:Name="BrowsePatientPage">
+
+    <RefreshView x:DataType="local:PatientListViewModel" Command="{Binding LoadPatientsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Patients}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Patient">
+                        <Label Text="{Binding FirstName}" 
+                            LineBreakMode="NoWrap" 
+                            FontSize="16" />
+                        <Label Text="{Binding LastName}" 
+                            LineBreakMode="NoWrap"
+                            FontSize="13" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>
