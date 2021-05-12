@@ -12,7 +12,10 @@ namespace HealthyMee.Services
 {
     public class PatientStore : IDataStore<Patient>
     {
-        static HttpClient client = new HttpClient();
+        static HttpClient client = new HttpClient
+        {
+            BaseAddress = new Uri("http://healthee.azurewebsites.net/")
+        };
 
         public Task<bool> AddItemAsync(Patient item)
         {
@@ -34,15 +37,16 @@ namespace HealthyMee.Services
             List<Patient> patient = null;
             try
             {
-                HttpResponseMessage response = await client.GetAsync("http://healthee.azurewebsites.net/api/Patients");
+                HttpResponseMessage response = await client.GetAsync("api/Patients");
                 if (response.IsSuccessStatusCode)
                 {
                     var strPatient = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<List<Patient>>(strPatient);
                 }
             }
-            catch (Exception ex) { 
-            
+            catch (Exception ex)
+            {
+
             }
             return patient;
         }

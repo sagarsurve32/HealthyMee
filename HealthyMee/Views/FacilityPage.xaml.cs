@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace HealthyMee.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class FacilityPage : ContentPage
     {
-        public LoginPage()
+        public FacilityPage()
         {
             InitializeComponent();
         }

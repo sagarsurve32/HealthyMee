@@ -12,8 +12,6 @@ namespace HealthyMee
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<PatientStore>();
             MainPage = new AppShell();
         }
